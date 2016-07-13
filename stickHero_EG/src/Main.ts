@@ -33,6 +33,7 @@ class Main extends egret.DisplayObjectContainer {
      * 加载进度界面
      * Process interface loading
      */
+    private startIcon:egret.Bitmap;
     private loadingView:LoadingUI;
 
     public constructor() {
@@ -117,60 +118,51 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene():void {
-        // var sky:egret.Bitmap = this.createBitmapByName("bgImage");
-        // this.addChild(sky);
-        // var sky:egret.Bitmap = this.createBitmapByName("start_normal");
-        // this.addChild(sky);
+
         var stageW:number = this.stage.stageWidth;
         var stageH:number = this.stage.stageHeight;
-        // sky.width = stageW;
-        // sky.height = stageH;
 
-        // sky.x = stageW / 2;
-        // sky.y = stageH / 2;
-        // var sw :number = sky.width;
-        // var sh : number = sky.height;
-        // sky.anchorOffsetX = sw / 2;
-        // sky.anchorOffsetY = sh / 2;
+        var gameBg :egret.Bitmap = GlobalFunc.crateGameBg();
+        this.addChild(gameBg);
 
+        var startBtn:egret.Bitmap = this.startIcon = GlobalFunc.createNornmalSprite("start_normal",new egret.Point(0.5,0.5));
+        this.addChild(startBtn);
+        startBtn.x = stageW / 2;
+        startBtn.y = stageH / 2;
 
-        var sky:egret.Bitmap = GlobalFunc.createNornmalSprite("start_normal");
-        this.addChild(sky);
-        GlobalFunc.changeAnchro(sky,new egret.Point(0.5,0.5));
-        sky.x = stageW / 2;
-        sky.y = stageH / 2;
+        startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onStartCkick,this);
+        startBtn.touchEnabled = true;
 
-
-
-        var topMask = new egret.Shape();
-        topMask.graphics.beginFill(0x000000, 0.5);
-        topMask.graphics.drawRect(0, 0, stageW, 172);
-        topMask.graphics.endFill();
-        topMask.y = 33;
-        this.addChild(topMask);
+    
+        // var topMask = new egret.Shape();
+        // topMask.graphics.beginFill(0x000000, 0.5);
+        // topMask.graphics.drawRect(0, 0, stageW, 172);
+        // topMask.graphics.endFill();
+        // topMask.y = 33;
+        // this.addChild(topMask);
 
         // var icon:egret.Bitmap = this.createBitmapByName("egretIcon");
         // this.addChild(icon);
         // icon.x = 26;
         // icon.y = 33;
 
-        var line = new egret.Shape();
-        line.graphics.lineStyle(2,0xffffff);
-        line.graphics.moveTo(0,0);
-        line.graphics.lineTo(0,117);
-        line.graphics.endFill();
-        line.x = 172;
-        line.y = 61;
-        this.addChild(line);
+        // var line = new egret.Shape();
+        // line.graphics.lineStyle(2,0xffffff);
+        // line.graphics.moveTo(0,0);
+        // line.graphics.lineTo(0,117);
+        // line.graphics.endFill();
+        // line.x = 172;
+        // line.y = 61;
+        // this.addChild(line);
 
 
         // var colorLabel = new egret.TextField();
         // colorLabel.textColor = 0xffffff;
-        // colorLabel.width = stageW - 172;
+        // colorLabel.width = stageW  - 400;
         // colorLabel.textAlign = "center";
-        // colorLabel.text = "Hello Egret";
+        // colorLabel.text = "Hello Egret hahahahahahahahahhaaha ";
         // colorLabel.size = 24;
-        // colorLabel.x = 172;
+        // colorLabel.x = 0;
         // colorLabel.y = 80;
         // this.addChild(colorLabel);
 
@@ -189,17 +181,15 @@ class Main extends egret.DisplayObjectContainer {
         // Get asynchronously a json configuration file according to name keyword. As for the property of name please refer to the configuration file of resources/resource.json.
         // RES.getResAsync("description", this.startAnimation, this)
     }
+    private onStartCkick (evt:egret.TouchEvent):void{
+        this.startIcon.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.onStartCkick,this);
+        this.removeChild(this.startIcon);
+    }
 
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
      * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
      */
-    private createBitmapByName(name:string):egret.Bitmap {
-        var result = new egret.Bitmap();
-        var texture:egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
-    }
 
     /**
      * 描述文件加载成功，开始播放动画
