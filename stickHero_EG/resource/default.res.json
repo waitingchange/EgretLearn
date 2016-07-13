@@ -1,0 +1,51 @@
+{
+	"resources": [
+		{
+			"name": "bgImage",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "egretIcon",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "background0_png",
+			"type": "image",
+			"url": "assets/background0.png"
+		},
+		{
+			"name": "background1_png",
+			"type": "image",
+			"url": "assets/background1.png"
+		},
+		{
+			"name": "background2_png",
+			"type": "image",
+			"url": "assets/background2.png"
+		},
+		{
+			"name": "background3_png",
+			"type": "image",
+			"url": "assets/background3.png"
+		},
+		{
+			"name": "egretRes_json",
+			"type": "sheet",
+			"url": "assets/egretRes.json",
+			"subkeys": "arrow,guide_text,kick,notify,overSoreBg,scoreBg,shake,shuaxin,start_normal,start_select,stick_black,walk,yao,zhuye"
+		}
+	],
+	"groups": [
+		{
+			"name": "preload",
+			"keys": "bgImage,egretIcon,background0_png,background1_png,background2_png,background3_png,egretRes_json"
+		}
+	]
+}
